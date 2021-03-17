@@ -624,6 +624,9 @@
             <Platforms>
                 <Platform value="Win32">True</Platform>
             </Platforms>
+            <UnitTesting>
+                <TestProjectName>C:\Projeto\Test\ProvaDelphiAppTests.dproj</TestProjectName>
+            </UnitTesting>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>

@@ -12,6 +12,9 @@
         <Projects Include="Components\spComponentesDT.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Test\ProvaDelphiAppTests.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -47,14 +50,23 @@
     <Target Name="spComponentesDT:Make">
         <MSBuild Projects="Components\spComponentesDT.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ProvaDelphiAppTests">
+        <MSBuild Projects="Test\ProvaDelphiAppTests.dproj"/>
+    </Target>
+    <Target Name="ProvaDelphiAppTests:Clean">
+        <MSBuild Projects="Test\ProvaDelphiAppTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProvaDelphiAppTests:Make">
+        <MSBuild Projects="Test\ProvaDelphiAppTests.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="ProvaDelphiApp;spComponente;spComponentesDT"/>
+        <CallTarget Targets="ProvaDelphiApp;spComponente;spComponentesDT;ProvaDelphiAppTests"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ProvaDelphiApp:Clean;spComponente:Clean;spComponentesDT:Clean"/>
+        <CallTarget Targets="ProvaDelphiApp:Clean;spComponente:Clean;spComponentesDT:Clean;ProvaDelphiAppTests:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ProvaDelphiApp:Make;spComponente:Make;spComponentesDT:Make"/>
+        <CallTarget Targets="ProvaDelphiApp:Make;spComponente:Make;spComponentesDT:Make;ProvaDelphiAppTests:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
