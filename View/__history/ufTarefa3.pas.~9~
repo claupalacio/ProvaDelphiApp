@@ -1,0 +1,88 @@
+unit ufTarefa3;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Datasnap.DBClient,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfTarefa3 = class(TForm)
+    dbgValores: TDBGrid;
+    Label1: TLabel;
+    btnTotal: TButton;
+    edtTotal: TEdit;
+    btnTotalDivisoes: TButton;
+    edtTotalDiv: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    procedure FormShow(Sender: TObject);
+  private
+    FDatasource : TDatasource;
+    FDataSet    : TCLientDataset;
+
+    function ConfiguraDataSet : TCLientDataset;
+    function ConfiguraDataSource : TDatasource;
+
+    procedure MontaGrid;
+  public
+    { Public declarations }
+  end;
+
+var
+  fTarefa3: TfTarefa3;
+
+implementation
+
+{$R *.dfm}
+
+{ TfTarefa3 }
+
+
+function TfTarefa3.ConfiguraDataSet: TCLientDataset;
+begin
+  ConfiguraDataSet := TClientDataSet.Create(nil);
+
+  ConfiguraDataSet.FieldDefs.Add('IdProjeto', ftInteger);
+  ConfiguraDataSet.FieldDefs.Add('NomeProjeto', ftString, 70);
+  ConfiguraDataSet.FieldDefs.Add('Valor', ftFloat);
+  ConfiguraDataSet.CreateDataSet;
+
+end;
+
+function TfTarefa3.ConfiguraDataSource: TDatasource;
+begin
+  ConfiguraDataSource := TDataSource.Create(nil);
+end;
+
+procedure TfTarefa3.FormShow(Sender: TObject);
+begin
+  MontaGrid;
+end;
+
+procedure TfTarefa3.MontaGrid;
+var
+  I: Integer;
+begin
+
+  FDataSet    := ConfiguraDataSet;
+  FDataSource := ConfiguraDataSource;
+
+  FDataSource.DataSet   := FDataSet;
+  dbgValores.DataSource := FDatasource;
+
+  for I := 0 to 10 do
+  begin
+    FDataSet.Append;
+    FDataSet.FieldByName('IdProjeto').AsInteger  := i;
+    FDataSet.FieldByName('NomeProjeto').AsString := 'Projeto ' + i.ToString;
+    FDataSet.FieldByName('Valor').AsFloat        := i * 10;
+    FDataSet.Post;
+  end;
+
+  TFloatField(FDataSet.FieldByName('Valor')).DisplayFormat := 'R$###,###,##0.00';
+
+end;
+
+end.

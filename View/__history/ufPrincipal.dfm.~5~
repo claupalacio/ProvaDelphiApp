@@ -1,0 +1,34 @@
+object fPrincipal: TfPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'Prova Delphi App'
+  ClientHeight = 340
+  ClientWidth = 536
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Menu = Tarefas
+  OldCreateOrder = False
+  Visible = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Tarefas: TMainMenu
+    Left = 72
+    Top = 48
+    object Tarefa1: TMenuItem
+      Caption = 'Tarefa 1'
+      OnClick = Tarefa1Click
+    end
+    object Tarefa2: TMenuItem
+      Caption = 'Tarefa 2'
+      OnClick = Tarefa2Click
+    end
+    object Tarefa3: TMenuItem
+      Caption = 'Tarefa 3'
+      OnClick = Tarefa3Click
+    end
+  end
+end

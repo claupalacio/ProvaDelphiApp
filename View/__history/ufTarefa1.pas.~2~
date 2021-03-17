@@ -1,0 +1,69 @@
+unit ufTarefa1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, uGeraSql_Controller;
+
+type
+  TfTarefa1 = class(TForm)
+    memColunas: TMemo;
+    memTabelas: TMemo;
+    memCondicoes: TMemo;
+    btnGeraSql: TBitBtn;
+    memSqlGerado: TMemo;
+    lblColunas: TLabel;
+    lblTabelas: TLabel;
+    lblCondicoes: TLabel;
+    lblSqlGerado: TLabel;
+    btnLimpar: TBitBtn;
+    procedure btnGeraSqlClick(Sender: TObject);
+    procedure btnLimparClick(Sender: TObject);
+  private
+    function  geraSQL : TStringList;
+    procedure limparCampos;
+  public
+    { Public declarations }
+  end;
+
+var
+  fTarefa1: TfTarefa1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfTarefa1.btnGeraSqlClick(Sender: TObject);
+begin
+  memSqlGerado.Clear;
+  memSqlGerado.lines := geraSQL;
+end;
+
+procedure TfTarefa1.btnLimparClick(Sender: TObject);
+begin
+  limparCampos;
+end;
+
+function TfTarefa1.geraSQL: TStringList;
+var
+  g : TGeraSql;
+begin
+  g := TGeraSql.Create;
+
+  g.SetColunas(memColunas);
+  g.SetTabela(memTabelas);
+  g.SetCondicoes(memCondicoes);
+
+  Result := g.GeraSQL;
+end;
+
+procedure TfTarefa1.limparCampos;
+begin
+  memColunas.Clear;
+  memTabelas.Clear;
+  memCondicoes.Clear;
+  memSqlGerado.Clear;
+end;
+
+end.

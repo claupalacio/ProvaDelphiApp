@@ -1,0 +1,62 @@
+unit uThread_Controller;
+
+interface
+
+uses
+  System.Classes, System.SysUtils, Vcl.ComCtrls;
+
+type
+  TSoftThread = class(TThread)
+
+  private
+    FIntervalo: Integer;
+    FPosicaoAtual: Integer;
+    FProgressBar: TProgressBar;
+
+    procedure SetIntervalo(Value: Integer);
+    procedure SetPosicaoAtual(Value: Integer);
+    procedure SetProgressBar(ProgressBar: TProgressBar);
+
+  public
+    constructor Create(IntervaloExecucao: Integer; ProgressBar: TProgressBar);
+
+    procedure Execute; override;
+    procedure Sincronizar;
+end;
+implementation
+
+{ TThread }
+
+constructor TSoftThread.Create(IntervaloExecucao: Integer;
+  ProgressBar: TProgressBar);
+begin
+
+end;
+
+procedure TSoftThread.Execute;
+begin
+  inherited;
+
+end;
+
+procedure TSoftThread.SetIntervalo(Value: Integer);
+begin
+
+end;
+
+procedure TSoftThread.SetPosicaoAtual(Value: Integer);
+begin
+
+end;
+
+procedure TSoftThread.SetProgressBar(ProgressBar: TProgressBar);
+begin
+
+end;
+
+procedure TSoftThread.Sincronizar;
+begin
+
+end;
+
+end.

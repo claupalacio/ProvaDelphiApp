@@ -1,0 +1,12 @@
+unit uiProjeto_Interface;
+
+interface
+
+type
+  iProjeto = interface
+    procedure SetValor(const Value: Currency);
+  end;
+
+implementation
+
+end.

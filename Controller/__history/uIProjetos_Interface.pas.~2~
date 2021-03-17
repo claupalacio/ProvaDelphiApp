@@ -1,0 +1,16 @@
+unit uIProjetos_Interface;
+
+interface
+
+uses uProjeto_Controller;
+
+type
+  iProjetos = interface
+    procedure CriarProjetos;
+    function GetProjeto(Indice : Integer) : TProjeto;
+  end;
+
+implementation
+
+
+end.

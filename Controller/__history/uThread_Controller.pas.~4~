@@ -1,0 +1,71 @@
+unit uThread_Controller;
+
+interface
+
+uses
+  System.Classes, System.SysUtils, Vcl.ComCtrls;
+
+type
+  TSoftThread = class(TThread)
+
+  private
+    FIntervalo   : Integer;
+    FPosicao     : Integer;
+    FProgressBar : TProgressBar;
+
+    procedure SetIntervalo(Intervalo: Integer);
+    procedure SetPosicaoAtual(Posicao: Integer);
+    procedure SetProgressBar(ProgressBar: TProgressBar);
+
+  public
+    constructor Create(Intervalo: Integer; ProgressBar: TProgressBar);
+
+    procedure Execute; override;
+    procedure Sincronizar;
+end;
+implementation
+
+{ TThread }
+
+constructor TSoftThread.Create(Intervalo: Integer;
+  ProgressBar: TProgressBar);
+begin
+
+  SetIntervalo(Intervalo);
+  SetProgressBar(ProgressBar);
+
+  FreeOnTerminate := True;
+
+  inherited Create(True);
+end;
+
+procedure TSoftThread.Execute;
+begin
+  inherited;
+
+end;
+
+procedure TSoftThread.SetIntervalo(Intervalo: Integer);
+begin
+  if Intervalo <= 0 then
+    raise Exception.Create('O intervalo deve ser maior que zero');
+
+  FIntervalo := Intervalo;
+end;
+
+procedure TSoftThread.SetPosicaoAtual(Posicao: Integer);
+begin
+  FPosicao := Posicao;
+end;
+
+procedure TSoftThread.SetProgressBar(ProgressBar: TProgressBar);
+begin
+  FProgressBar := ProgressBar;
+end;
+
+procedure TSoftThread.Sincronizar;
+begin
+
+end;
+
+end.

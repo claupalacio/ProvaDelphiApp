@@ -1,0 +1,39 @@
+unit ufrmPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
+
+type
+  TfrmPrincipal = class(TForm)
+    Tarefas: TMainMenu;
+    Tarefa1: TMenuItem;
+    Tarefa2: TMenuItem;
+    Tarefa3: TMenuItem;
+    procedure Tarefa1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+uses ufrmTarefa1;
+
+procedure TfrmPrincipal.Tarefa1Click(Sender: TObject);
+var
+  T : TfrmTarefa1;
+begin
+  T := TfrmTarefa1.Create(nil);
+  T.Show;
+end;
+
+end.

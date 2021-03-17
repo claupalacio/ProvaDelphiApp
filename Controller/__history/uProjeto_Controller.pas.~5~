@@ -1,0 +1,32 @@
+unit uProjeto_Controller;
+
+interface
+
+uses uiProjeto_Interface;
+
+type
+
+  TProjeto = class(TInterfacedObject, iProjeto)
+
+    private
+      FId    : Integer;
+      FNome  : String;
+      FValor : Currency;
+
+    public
+      constructor Create(Id: Integer; Nome: String; Valor: Currency);
+  end;
+
+implementation
+
+
+{ TProjeto }
+
+constructor TProjeto.Create(Id: Integer; Nome: String; Valor: Currency);
+begin
+  FId    := Id;
+  FNome  := Nome;
+  FValor := Valor;
+end;
+
+end.

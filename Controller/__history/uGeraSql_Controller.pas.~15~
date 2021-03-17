@@ -1,0 +1,66 @@
+unit uGeraSql_Controller;
+
+interface
+
+uses
+  uIGeraSql_Interface, Vcl.StdCtrls, System.Classes, System.SysUtils;
+
+type
+
+  TGeraSql = class(TInterfacedObject, IGeraSql)
+
+    private
+      FColunas   : TMemo;
+      FTabela    : TMemo;
+      FCondicoes : TMemo;
+
+    public
+	    procedure SetColunas(Colunas: TMemo);
+      procedure SetTabela(Tabela: TMemo);
+      procedure SetCondicoes(Condicoes: TMemo);
+      function  GeraSQL : TStringList;
+  end;
+
+implementation
+
+{ TGeraSql }
+
+uses uspQuery;
+
+function TGeraSql.GeraSQL: TStringList;
+var
+  qryGeraSQL : TspQuery;
+begin
+
+  qryGeraSQL := TspQuery.Create(nil);
+
+  qryGeraSQL.spColunas.AddStrings(FColunas.Lines);
+  qryGeraSQL.spTabelas.AddStrings(FTabela.Lines);
+  qryGeraSQL.spCondicoes.AddStrings(FCondicoes.Lines);
+
+  Result := qryGeraSQL.GeraSQL;
+
+end;
+
+procedure TGeraSql.SetColunas(Colunas: TMemo);
+begin
+  FColunas := Colunas;
+end;
+
+procedure TGeraSql.SetCondicoes(Condicoes: TMemo);
+begin
+  FCondicoes := Condicoes;
+end;
+
+procedure TGeraSql.SetTabela(Tabela: TMemo);
+begin
+  if Tabela.Lines.Count > 1 then
+    raise Exception.Create('Quantidade de tabelas maior que 1!');
+
+  if Tabela.Lines.Count = 1 then
+    raise Exception.Create('Nenhuma tabela selecionada!');
+
+  FTabela := Tabela;
+end;
+
+end.

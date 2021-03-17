@@ -1,0 +1,28 @@
+unit uThread_Controller;
+
+interface
+
+uses
+  uIThread_Interface, System.Classes, System.SysUtils, Vcl.ComCtrls;
+
+type
+  TThread = class(TInterfacedObject, IThread)
+
+  private
+    FIntervalo: Integer;
+    FPosicaoAtual: Integer;
+    FProgressBar: TProgressBar;
+
+    procedure SetIntervalo(Value: Integer);
+    procedure SetPosicaoAtual(Value: Integer);
+    procedure SetProgressBar(ProgressBar: TProgressBar);
+
+  public
+    constructor Create(IntervaloExecucao: Integer; ProgressBar: TProgressBar);
+
+    procedure Execute; override;
+    procedure Sincronizar;
+end;
+implementation
+
+end.

@@ -1,0 +1,22 @@
+unit uMontaDataSet_Controller;
+
+interface
+
+uses uiMontaDataSet_Interface, Datasnap.DBClient, Data.DB, System.SysUtils,
+  Vcl.Forms;
+
+type
+  TMontaDataSet = class(TInterfacedObject, iMontaDataSet)
+
+  private
+
+  public
+    function PopulateDataSet: String;
+    function CreateDataSet: TClientDataSet;
+    function CreateDataSource :TDataSource;
+
+  end;
+
+implementation
+
+end.

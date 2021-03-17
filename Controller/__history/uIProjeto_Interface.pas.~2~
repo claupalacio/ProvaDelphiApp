@@ -1,0 +1,11 @@
+unit uiProjeto_Interface;
+
+interface
+
+type
+  iProjeto = interface
+  end;
+
+implementation
+
+end.

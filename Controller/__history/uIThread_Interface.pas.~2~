@@ -1,0 +1,20 @@
+unit uIThread_Interface;
+
+interface
+
+uses Vcl.ComCtrls, System.Classes;
+
+type
+  //Implementação da interface ISubstitui com função única
+  IThread = interface
+    procedure SetIntervalo(Intervalo: Integer);
+    procedure SetPosicao(Posicao: Integer);
+    procedure SetProgressBar(ProgressBar: TProgressBar);
+    procedure Execute;
+    constructor Create(Intervalo: Integer; ProgressBar: TProgressBar);
+    procedure Sincronizar;
+  end;
+
+implementation
+
+end.

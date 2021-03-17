@@ -1,0 +1,29 @@
+program ProvaDelphiApp;
+
+uses
+  Vcl.Forms,
+  ufPrincipal in 'View\ufPrincipal.pas' {fPrincipal},
+  uIGeraSql_Interface in 'Controller\uIGeraSql_Interface.pas',
+  uGeraSql_Controller in 'Controller\uGeraSql_Controller.pas',
+  ufTarefa1 in 'View\ufTarefa1.pas' {fTarefa1},
+  ufTarefa2 in 'View\ufTarefa2.pas' {fTarefa2},
+  uThread_Controller in 'Controller\uThread_Controller.pas',
+  ufTarefa3 in 'View\ufTarefa3.pas' {fTarefa3},
+  uiMontaDataSet_Interface in 'Controller\uiMontaDataSet_Interface.pas',
+  uMontaDataSet_Controller in 'Controller\uMontaDataSet_Controller.pas',
+  uiProjeto_Interface in 'Controller\uiProjeto_Interface.pas',
+  uProjeto_Controller in 'Controller\uProjeto_Controller.pas',
+  uIProjetos_Interface in 'Controller\uIProjetos_Interface.pas',
+  uProjetos_Controller in 'Controller\uProjetos_Controller.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfPrincipal, fPrincipal);
+  Application.CreateForm(TfTarefa1, fTarefa1);
+  Application.CreateForm(TfTarefa2, fTarefa2);
+  Application.CreateForm(TfTarefa3, fTarefa3);
+  Application.Run;
+end.

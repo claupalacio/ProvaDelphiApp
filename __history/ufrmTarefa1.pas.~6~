@@ -1,0 +1,82 @@
+unit ufrmTarefa1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TfrmTarefa1 = class(TForm)
+    memColunas: TMemo;
+    memTabelas: TMemo;
+    memCondicoes: TMemo;
+    btnGeraSql: TBitBtn;
+    memSqlGerado: TMemo;
+    lblColunas: TLabel;
+    lblTabelas: TLabel;
+    lblCondicoes: TLabel;
+    lblSqlGerado: TLabel;
+    btnLimpar: TBitBtn;
+    procedure btnGeraSqlClick(Sender: TObject);
+  private
+    function geraSQL(colunas,tabelas,condicoes : TStrings) : TStringList;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmTarefa1: TfrmTarefa1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmTarefa1.btnGeraSqlClick(Sender: TObject);
+begin
+  memSqlGerado.lines := geraSQL(memColunas.Lines,memTabelas.Lines,memCondicoes.Lines);
+end;
+
+function TfrmTarefa1.geraSQL(colunas, tabelas,
+  condicoes: TStrings): TStringList;
+var
+  s : String;
+  spCondicoes : TStringList;
+  spColunas   : TStringList;
+  spTabelas   : TStringList;
+  spSQL       : TStringList;
+begin
+
+  spSQL       := TStringList.Create;
+  spColunas   := TStringList.Create;
+  spTabelas   := TStringList.Create;
+  spCondicoes := TStringList.Create;
+
+  spColunas.AddStrings(colunas);
+  spTabelas.AddStrings(tabelas);
+  spCondicoes.AddStrings(condicoes);
+
+  spSQL.add('select');
+
+  for s in spColunas do
+  begin
+    if spSQL.Count = 1 then
+      spSQL.add('  ' + s )
+    else
+      spSQL.add(' ,' + s);
+
+  end;
+
+  spSQL.add('from');
+  for s in spTabelas do
+    spSQL.add('  ' + s );
+
+  spSQL.add('where 1 = 1 ');
+  for s in spCondicoes do
+    spSQL.add('   and ' + s);
+
+  Result := spSQL;
+
+end;
+
+end.

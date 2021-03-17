@@ -1,0 +1,122 @@
+unit ufTarefa3;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Datasnap.DBClient,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, uMontaDataSet_Controller;
+
+type
+  TfTarefa3 = class(TForm)
+    dbgValores: TDBGrid;
+    Label1: TLabel;
+    btnTotal: TButton;
+    edtTotal: TEdit;
+    btnTotalDivisoes: TButton;
+    edtTotalDiv: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    procedure FormShow(Sender: TObject);
+    procedure btnTotalClick(Sender: TObject);
+    procedure btnTotalDivisoesClick(Sender: TObject);
+  private
+    FDatasource   : TDatasource;
+    FDataSet      : TCLientDataset;
+
+    procedure MontaGrid;
+    function SomaTotal         : Double;
+    function SomaTotalDivisoes : Double;
+  public
+    { Public declarations }
+  end;
+
+var
+  fTarefa3: TfTarefa3;
+
+implementation
+
+{$R *.dfm}
+
+{ TfTarefa3 }
+
+
+procedure TfTarefa3.btnTotalClick(Sender: TObject);
+begin
+  edtTotal.Text := FormatFloat('0.00', SomaTotal);
+end;
+
+procedure TfTarefa3.btnTotalDivisoesClick(Sender: TObject);
+begin
+  edtTotal.Text := FormatFloat('0.00', SomaTotalDivisoes);
+end;
+
+procedure TfTarefa3.FormShow(Sender: TObject);
+begin
+  MontaGrid;
+end;
+
+procedure TfTarefa3.MontaGrid;
+var
+  M : TMontaDataSet;
+begin
+  M := TMontaDataSet.Create;
+
+  FDataSet    := M.MontaDataSet;
+  FDataSource := M.ConfiguraDataSource;
+
+  FDataSource.DataSet   := FDataSet;
+  dbgValores.DataSource := FDatasource;
+
+  TFloatField(FDataSet.FieldByName('Valor')).DisplayFormat := 'R$###,###,##0.00';
+
+end;
+
+function TfTarefa3.SomaTotal: Double;
+var
+  Total : Double;
+begin
+
+ Total := 0;
+
+ FDataSet.First;
+
+ while not FDataSet.Eof do
+ begin
+    Total := Total + FDataSet.FieldByName('Valor').AsFloat;
+    FDataSet.Next;
+ end;
+
+ Result := Total;
+
+end;
+
+function TfTarefa3.SomaTotalDivisoes: Double;
+var
+  id: Integer;
+  Total, vrAtual, vrAnterior: Double;
+begin
+
+  Total :=0;
+
+  FDataSet.First;
+  id := FDataSet.FieldByName('IdProjeto').AsInteger;
+
+  while not FDataSet.Eof do
+  begin
+    vrAtual := FDataSet.FieldByName('Valor').AsFloat;
+
+    if id <> FDataSet.FieldByName('IdProjeto').AsInteger then
+      Total := Total + (vrAtual/vrAnterior);
+
+    vrAnterior := FDataSet.FieldByName('Valor').AsFloat;
+    id         := FDataSet.FieldByName('IdProjeto').AsInteger;
+
+    FDataSet.Next;
+  end;
+
+  Result := Total;
+
+end;
+
+end.
